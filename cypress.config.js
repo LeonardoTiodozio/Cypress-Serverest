@@ -3,9 +3,8 @@ const allureWriter = require('@shelex/cypress-allure-plugin/writer');
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: 'https://front.serverest.dev/login', // ou sua instância local do ServeRest
+    baseUrl: 'https://front.serverest.dev/login', 
     setupNodeEvents(on, config) {
-      // registra o writer do allure
       allureWriter(on, config);
       return config;
     },
