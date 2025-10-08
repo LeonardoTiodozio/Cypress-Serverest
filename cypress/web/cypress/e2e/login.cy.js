@@ -1,16 +1,8 @@
 describe('Aba de Login', () =>{
   it('Login com credenciais validas', () => {
-    cy.visit('https://front.serverest.dev/login')
-    cy.viewport(1400,900)
-  
-    cy.get('[data-testid="email"]')
-      .type('leonardoQA@teste.com')
-
-    cy.get('[data-testid="senha"]')
-      .type('leonardoleo123')
-
-    cy.get('[data-testid="entrar"]')
-      .click()
+    cy.iniciar()
+    
+    cy.login('leonardoQA@teste.com', 'leonardoleo123')
 
     cy.contains('Bem Vindo')
       .should('exist')
@@ -22,20 +14,27 @@ describe('Aba de Login', () =>{
       .should('eq', 'https://front.serverest.dev/admin/home')
   })
 
-  it.only('Login com credenciais de email invalido', () => {
-    cy.visit('https://front.serverest.dev/login')
-    cy.viewport(1400,900)
+  it('Login com credenciais de email invalido', () => {
+    cy.iniciar()
 
-    cy.get('[data-testid="email"]')
-      .type('leonardo@teste.com')
-
-    cy.get('[data-testid="senha"]')
-      .type('leonardoleo123')
-
-    cy.get('[data-testid="entrar"]')
-      .click()
-
+    cy.login('leonardo@teste.com', 'leonardoleo123')
+    
     cy.contains('Email e/ou senha inválidos')
       .should('exist')
+    
+    cy.url()
+      .should('eq', 'https://front.serverest.dev/login')
   }) 
+
+  it('Login com credencias de senha invalido', () => { 
+    cy.iniciar()
+
+    cy.login('leonardoQA@teste.com', 'leonardoleo')
+
+    cy.contains('Email e/ou senha inválidos')
+      .should('exist')    
+
+    cy.url()
+      .should('eq', 'https://front.serverest.dev/login')
+  })
 })
