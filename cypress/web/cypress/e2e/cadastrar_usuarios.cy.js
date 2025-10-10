@@ -23,7 +23,7 @@ describe('Validações na aba de Cadastrar Usuarios', () => {
             .should('be.visible')
             .parent()
             .find('input')
-            .type('leonardo@teste.com')
+            .type('leonardo@testee.com')
             
         cy.contains('Senha: *')
             .should('be.visible')
